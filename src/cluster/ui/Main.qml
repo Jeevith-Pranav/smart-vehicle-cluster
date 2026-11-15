@@ -1,3 +1,4 @@
+import QtQuick.Controls
 import QtQuick
 import QtQuick.Window
 
@@ -6,6 +7,7 @@ Window {
     width: 800
     height: 480
     visible: true
+    visibility: startFullscreen ? Window.FullScreen : Window.Windowed
     color: "#0b0f14"
     title: "Smart Cluster"
 
@@ -129,5 +131,21 @@ Window {
             : vehicle.battery <= 10 ? "⚠ LOW BATTERY"
             : ""
         color: "#ff3b30"
+    }
+    
+        // ---------- Manual test sliders (only with --source manual) ----------
+    Slider {
+        visible: testMode
+        x: 30; y: 350; width: 230
+        from: 0; to: 100
+        value: vehicle.battery
+        onMoved: vehicle.battery = value
+    }
+    Slider {
+        visible: testMode
+        x: 540; y: 350; width: 230
+        from: 0; to: 100
+        value: vehicle.fuel
+        onMoved: vehicle.fuel = value
     }
 }
